@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin KKGK Kecamatan Jatiasih</title>
+  <meta name="robots" content="noindex">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#f2f7fc;color:#173553;min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}
+    main{max-width:580px;width:100%;background:#fff;border:1px solid #dce8f5;border-radius:20px;padding:30px;box-sizing:border-box;box-shadow:0 20px 55px #163d6414}
+    img{width:76px;height:76px;object-fit:contain}h1{font-size:26px;margin:14px 0 8px;color:#0c2b52}p{line-height:1.7;color:#60758b;font-size:14px}
+    .btn{display:inline-block;border:0;background:#1267c5;color:#fff;padding:13px 18px;border-radius:10px;font-weight:bold;text-decoration:none;cursor:pointer;margin:8px 8px 0 0}
+    .secondary{background:#eaf4ff;color:#1267c5}.note{background:#fff8e9;border-radius:10px;padding:12px;font-size:12px;color:#7d6029;margin-top:22px}
+  </style>
+</head>
+<body>
+<main>
+  <img src="../assets/logo-kkgk.png" alt="Logo KKGK Kecamatan Jatiasih">
+  <h1>Admin KKGK Kecamatan Jatiasih</h1>
+  <p>Gunakan halaman ini untuk masuk ke pengelolaan berita dan konten website setelah administrator mengaktifkan Netlify Identity, Git Gateway, dan menghubungkan website ke repositori Git.</p>
+  <button class="btn" onclick="netlifyIdentity.open('login')">Login Admin</button>
+  <button class="btn secondary" onclick="netlifyIdentity.open('signup')">Daftar / Undangan</button>
+  <p id="status" aria-live="polite"></p>
+  <div class="note"><strong>Belum selesai konfigurasi:</strong> tombol login tidak dapat berfungsi sungguhan sampai Identity dan Git Gateway diaktifkan di Netlify. Jangan gunakan halaman ini untuk memasukkan kata sandi sampai konfigurasi tersebut selesai.</div>
+</main>
+<script>
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', user => {
+      if (user) document.getElementById('status').textContent = 'Anda sudah masuk sebagai ' + (user.email || 'pengguna') + '.';
+    });
+    netlifyIdentity.on('login', () => { window.location.href = '/admin/'; });
+  }
+</script>
+</body>
+</html>

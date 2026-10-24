@@ -1,0 +1,88 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Admin | KKGK Jatiasih</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #082b65, #0878d1);
+    }
+    .card {
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px #001b4533;
+      text-align: center;
+    }
+    img { width: 105px; height: 105px; object-fit: contain; }
+    h1 { color: #103b7a; font-size: 23px; margin-bottom: 8px; }
+    p { color: #64748b; font-size: 14px; }
+    label { display: block; text-align: left; margin: 18px 0 7px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      background: #075bc5;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background: #06479a; }
+    #pesan { color: #b91c1c; line-height: 1.5; }
+    a { color: #075bc5; text-decoration: none; }
+    .kembali { display: block; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img src="../logo-kkgk.png" alt="Logo KKGK"
+         onerror="this.style.display='none'">
+    <h1>Admin KKGK Jatiasih</h1>
+    <p>Silakan masuk ke halaman pengelolaan website.</p>
+
+    <form id="loginForm">
+      <label for="username">Nama pengguna</label>
+      <input id="username" autocomplete="username" required>
+
+      <label for="password">Kata sandi</label>
+      <input id="password" type="password"
+             autocomplete="current-password" required>
+
+      <button type="submit">Masuk</button>
+      <p id="pesan" role="alert"></p>
+    </form>
+
+    <a class="kembali" href="../index.html">← Kembali ke Beranda</a>
+  </main>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("pesan").textContent =
+        "Sistem login belum dikonfigurasi. Hubungkan autentikasi admin yang aman sebelum digunakan.";
+    });
+  </script>
+</body>
+</html>
+```

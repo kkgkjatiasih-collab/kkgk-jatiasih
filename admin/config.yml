@@ -1,0 +1,35 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# File unggahan media akan disimpan di repositori.
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: https://kkgkjatiasih.netlify.app
+display_url: https://kkgkjatiasih.netlify.app
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "berita"
+    label: "Berita dan Kegiatan"
+    folder: "content/berita"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Judul", name: "title", widget: "string" }
+      - { label: "Tanggal", name: "date", widget: "datetime" }
+      - { label: "Ringkasan", name: "description", widget: "text" }
+      - { label: "Gambar", name: "thumbnail", widget: "image", required: false }
+      - { label: "Isi Berita", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Halaman"
+    files:
+      - label: "Profil KKGK"
+        name: "profil"
+        file: "content/profil.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Isi", name: "body", widget: "markdown" }

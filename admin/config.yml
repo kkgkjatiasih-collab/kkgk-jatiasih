@@ -1,4 +1,4 @@
-   logo_url: "/assets/Logo%20KKGK%20Kecamatan%20Jatiasih.png"
+logo_url: "/assets/Logo%20KKGK%20Kecamatan%20Jatiasih.png"
    
 backend:
   name: git-gateway

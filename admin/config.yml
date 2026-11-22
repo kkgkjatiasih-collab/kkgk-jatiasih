@@ -1,5 +1,5 @@
 logo:
-  src: "/assets/logo-kkgk.png"
+    src: "/assets/Logo%20KKGK%20Kecamatan%20Jatiasih.png"
   show_in_header: true
 backend:
   name: git-gateway

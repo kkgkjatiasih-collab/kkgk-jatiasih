@@ -33,3 +33,10 @@ collections:
         fields:
           - { label: "Judul", name: "title", widget: "string" }
           - { label: "Isi", name: "body", widget: "markdown" }
+
+      - label: "Program Kerja"
+        name: "program"
+        file: "content/program.md"
+        fields:
+          - { label: "Judul", name: "title", widget: "string" }
+          - { label: "Isi", name: "body", widget: "markdown" }

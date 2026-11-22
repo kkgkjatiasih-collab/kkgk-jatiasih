@@ -1,35 +1,36 @@
 # Website KKGK Kecamatan Jatiasih
 
-Website statis sederhana, responsif, dan berbahasa Indonesia.
+Website statis responsif berbahasa Indonesia untuk KKGK Kecamatan Jatiasih.
 
-## Isi
-- `index.html` — struktur halaman dan konten contoh
-- `style.css` — desain biru-putih dan tampilan responsif
-- `script.js` — menu mobile, modal login demo, dan interaksi sederhana
+## Struktur
+- `index.html` — halaman utama: Beranda, Profil, Pengurus, Program Kerja, Berita, Galeri, dan Kontak.
+- `style.css` — desain biru-putih dan tata letak responsif.
+- `script.js` — navigasi mobile dan interaksi halaman.
+- `assets/logo-kkgk.png` — logo KKGK yang disertakan dalam paket.
+- `admin/` — antarmuka Decap CMS.
+- `content/` — berkas konten Markdown untuk CMS.
 
-## Cara mencoba di komputer
-1. Ekstrak file ZIP ke sebuah folder.
-2. Buka folder `kkgk_jatiasih_website`.
-3. Klik dua kali `index.html` untuk membukanya di browser.
-4. Coba menu Profil, Berita & Kegiatan, Galeri, dan tombol Login Admin.
+## Menjalankan lokal
+Ekstrak ZIP, lalu buka `index.html` di browser. Untuk menguji CMS dan fungsi autentikasi, situs harus dipublikasikan melalui Netlify dengan konfigurasi Identity dan Git Gateway yang benar.
 
-Tidak perlu instalasi aplikasi atau menjalankan server untuk mencoba versi awal ini. Font dari Google Fonts memerlukan internet; jika offline, browser akan memakai font cadangan.
+## Pengelolaan konten
+Alamat admin setelah deploy: `https://kkgkjatiasih.netlify.app/admin/`.
 
-## Cara mengubah isi
-- Nama dan isi halaman: edit `index.html` dengan Notepad atau editor teks.
-- Warna, ukuran, dan desain: edit `style.css`.
-- Interaksi tombol: edit `script.js`.
-- Konten berita dan placeholder galeri di `index.html` masih contoh. Ganti dengan data resmi, tanggal, tautan, dan foto kegiatan KKGK yang boleh dipublikasikan.
-- Tombol WhatsApp menggunakan tautan placeholder `https://wa.me/`. Ganti dengan nomor resmi dalam format internasional tanpa tanda `+`, spasi, atau tanda baca. Contoh format: `https://wa.me/62812xxxxxxxx`.
+CMS disiapkan menggunakan Decap CMS dengan backend `git-gateway` pada branch `main`. Agar login dan penyimpanan konten aktif:
+1. Pastikan seluruh isi folder proyek berada di repositori GitHub yang terhubung ke situs Netlify.
+2. Pastikan branch produksi yang dipakai adalah `main`.
+3. Di pengaturan Netlify, aktifkan Netlify Identity (jika tersedia pada konfigurasi akun/site).
+4. Atur pendaftaran menjadi undangan saja (Invite only), lalu undang akun pengelola.
+5. Aktifkan Git Gateway bila tersedia untuk site tersebut.
+6. Deploy ulang, kemudian uji login di `/admin/` dan buat satu berita uji.
 
-## Penting tentang Login Admin
-Login yang tersedia saat ini hanya simulasi antarmuka. Tidak ada akun atau kata sandi yang valid, tidak ada autentikasi server, dan tidak ada penyimpanan konten. Jangan memasukkan kata sandi asli. Untuk login admin sungguhan, diperlukan backend atau layanan autentikasi serta tempat penyimpanan berita dan foto.
+Catatan: menambahkan file CMS ke ZIP tidak otomatis mengaktifkan Identity/Git Gateway di akun Netlify. Fitur admin baru dapat dinyatakan aktif setelah pengaturan dashboard dan pengujian berhasil.
 
-## Cara menerbitkan gratis
-Pilihan mudah untuk website statis adalah GitHub Pages atau Netlify:
-1. Buat akun di layanan pilihan.
-2. Unggah/push file `index.html`, `style.css`, dan `script.js` ke proyek atau situs baru.
-3. Ikuti instruksi layanan untuk menerbitkan situs statis.
-4. Layanan akan memberi alamat publik gratis. Nama alamat mengikuti ketersediaan layanan; domain sendiri bisa ditambahkan kemudian.
+## Data yang masih harus dilengkapi
+- Nama dan jabatan pengurus berdasarkan SK resmi.
+- Program kerja final, jadwal, penanggung jawab, dan target.
+- Berita serta foto kegiatan yang boleh dipublikasikan.
+- Nomor WhatsApp atau alamat kontak resmi.
+- Profil organisasi yang telah disahkan.
 
-Pastikan tidak mengunggah data pribadi anggota atau siswa tanpa izin.
+Jangan memasukkan data pribadi anggota atau siswa tanpa izin.

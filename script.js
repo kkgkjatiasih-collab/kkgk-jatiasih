@@ -21,13 +21,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const toast = document.getElementById('toast');
 const showAllNews = document.getElementById('showAllNews');
-if (showAllNews) {
-  showAllNews.addEventListener('click', () => {
-    toast.textContent = 'Berita resmi akan ditampilkan setelah konten diterbitkan melalui Admin KKGK.';
-    toast.classList.add('show');
-    window.setTimeout(() => toast.classList.remove('show'), 3200);
-  });
-}
+
 
 // Mengambil berita terbaru dari CMS KKGK
 (async function loadKKGKNews() {
@@ -132,7 +126,77 @@ if (showAllNews) {
           </div>
         </article>
       `;
-    }).join('');
+    }).join('');// Menampilkan seluruh arsip berita CMS
+if (showAllNews) {
+  showAllNews.addEventListener('click', () => {
+    let archive = document.getElementById('newsArchiveDialog');
+
+    if (!archive) {
+      archive = document.createElement('dialog');
+      archive.id = 'newsArchiveDialog';
+      archive.style.cssText =
+        'width:min(800px,90%);max-height:85vh;overflow:auto;border:0;border-radius:16px;padding:28px;box-shadow:0 10px 40px #0004;';
+      document.body.appendChild(archive);
+    }
+
+    function showArchiveList() {
+      archive.innerHTML = `
+        <button id="closeArchive" style="float:right;padding:8px 14px">
+          Tutup ✕
+        </button>
+        <h2>Arsip Berita KKGK Jatiasih</h2>
+        <p>Seluruh berita dan kegiatan yang telah diterbitkan.</p>
+        <hr>
+        ${articles
+          .filter(article => article && article.title)
+          .sort((a, b) => b.date.localeCompare(a.date))
+          .map((article, index) => `
+            <div style="padding:14px 0;border-bottom:1px solid #ddd">
+              <p style="color:#2875c7">${escapeHTML(article.date || '')}</p>
+              <button class="archive-item" data-index="${index}"
+                style="border:0;background:none;color:#174f91;font-size:17px;font-weight:bold;text-align:left;cursor:pointer">
+                ${escapeHTML(article.title)}
+              </button>
+              <p>${escapeHTML(article.description || '')}</p>
+            </div>
+          `).join('')}
+      `;
+
+      archive.showModal();
+
+      archive.querySelector('#closeArchive')
+        .addEventListener('click', () => archive.close());
+
+      archive.querySelectorAll('.archive-item').forEach(button => {
+        button.addEventListener('click', () => {
+          const allArticles = articles
+            .filter(article => article && article.title)
+            .sort((a, b) => b.date.localeCompare(a.date));
+
+          const article = allArticles[Number(button.dataset.index)];
+
+          archive.innerHTML = `
+            <button id="backArchive" style="padding:8px 14px">
+              ← Kembali ke Arsip
+            </button>
+            <h2>${escapeHTML(article.title)}</h2>
+            <p>${escapeHTML(article.date || '')}</p>
+            <p>${escapeHTML(article.description || '')}</p>
+            <hr>
+            <p style="white-space:pre-wrap;line-height:1.8">
+              ${escapeHTML(article.body)}
+            </p>
+          `;
+
+          archive.querySelector('#backArchive')
+            .addEventListener('click', showArchiveList);
+        });
+      });
+    }
+
+    showArchiveList();
+  });
+}
 // Membuka berita lengkap saat kartu diklik
 newsGrid.querySelectorAll('.news-card').forEach(card => {
   card.style.cursor = 'pointer';

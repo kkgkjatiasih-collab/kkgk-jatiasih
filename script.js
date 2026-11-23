@@ -48,6 +48,20 @@ const showAllNews = document.getElementById('showAllNews');
       .replace(/\s+/g, ' ')
       .trim();
   }
+  function formatTanggal(tanggal) {
+  if (!tanggal) return '';
+
+  const date = new Date(tanggal);
+
+  if (isNaN(date.getTime())) return tanggal;
+
+  return date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'Asia/Jakarta'
+  });
+}
 
   function escapeHTML(text) {
     return text.replace(/[&<>"']/g, char => ({
@@ -101,9 +115,8 @@ const showAllNews = document.getElementById('showAllNews');
     newsGrid.innerHTML = latest.map((article, index) => {
       const colors = ['visual-blue', 'visual-cyan', 'visual-navy'];
       const symbols = ['✦', '◎', '↗'];
-      const date = article.date
-        ? article.date.substring(0, 10)
-        : '';
+      
+const date = formatTanggal(article.date);
 
       return `
         <article class="news-card" data-news-index="${index}">
@@ -152,7 +165,7 @@ if (showAllNews) {
           .sort((a, b) => b.date.localeCompare(a.date))
           .map((article, index) => `
             <div style="padding:14px 0;border-bottom:1px solid #ddd">
-              <p style="color:#2875c7">${escapeHTML(article.date || '')}</p>
+             <p style="color:#2875c7">${escapeHTML(formatTanggal(article.date))}</p>
               <button class="archive-item" data-index="${index}"
                 style="border:0;background:none;color:#174f91;font-size:17px;font-weight:bold;text-align:left;cursor:pointer">
                 ${escapeHTML(article.title)}
@@ -180,7 +193,7 @@ if (showAllNews) {
               ← Kembali ke Arsip
             </button>
             <h2>${escapeHTML(article.title)}</h2>
-            <p>${escapeHTML(article.date || '')}</p>
+            ${escapeHTML(formatTanggal(article.date))}
             <p>${escapeHTML(article.description || '')}</p>
             <hr>
             <p style="white-space:pre-wrap;line-height:1.8">
@@ -220,7 +233,7 @@ newsGrid.querySelectorAll('.news-card').forEach(card => {
         style="float:right;padding:8px 14px;cursor:pointer">
         Tutup ✕
       </button>
-      <p style="color:#2875c7">${escapeHTML(article.date || '')}</p>
+      <p style="color:#2875c7">${escapeHTML(formatTanggal(article.date))}</p>
       <h2>${escapeHTML(article.title)}</h2>
       <p>${escapeHTML(article.description || '')}</p>
       <hr>

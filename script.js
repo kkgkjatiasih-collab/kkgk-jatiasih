@@ -121,6 +121,13 @@ const date = formatTanggal(article.date);
 
       return `
         <article class="news-card" data-news-index="${index}">
+        ${article.thumbnail ? `
+  <img
+    src="${escapeHTML(article.thumbnail)}"
+    alt="${escapeHTML(article.title)}"
+    style="width:100%;height:180px;object-fit:cover;display:block;"
+  >
+` : ''}
           <div class="news-visual ${colors[index % 3]}">
             <span class="visual-symbol">${symbols[index % 3]}</span>
             <span class="visual-tag">BERITA KKGK</span>

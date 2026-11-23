@@ -112,7 +112,7 @@ if (showAllNews) {
         : '';
 
       return `
-        <article class="news-card">
+        <article class="news-card" data-news-index="${index}">
           <div class="news-visual ${colors[index % 3]}">
             <span class="visual-symbol">${symbols[index % 3]}</span>
             <span class="visual-tag">BERITA KKGK</span>
@@ -133,7 +133,44 @@ if (showAllNews) {
         </article>
       `;
     }).join('');
+// Membuka berita lengkap saat kartu diklik
+newsGrid.querySelectorAll('.news-card').forEach(card => {
+  card.style.cursor = 'pointer';
 
+  card.addEventListener('click', () => {
+    const article = latest[Number(card.dataset.newsIndex)];
+    if (!article) return;
+
+    let dialog = document.getElementById('newsDetailDialog');
+
+    if (!dialog) {
+      dialog = document.createElement('dialog');
+      dialog.id = 'newsDetailDialog';
+      dialog.style.cssText =
+        'width:min(700px,90%);max-height:85vh;overflow:auto;border:0;border-radius:16px;padding:28px;box-shadow:0 10px 40px #0004;';
+      document.body.appendChild(dialog);
+    }
+
+    dialog.innerHTML = `
+      <button id="closeNewsDetail"
+        style="float:right;padding:8px 14px;cursor:pointer">
+        Tutup ✕
+      </button>
+      <p style="color:#2875c7">${escapeHTML(article.date || '')}</p>
+      <h2>${escapeHTML(article.title)}</h2>
+      <p>${escapeHTML(article.description || '')}</p>
+      <hr>
+      <p style="white-space:pre-wrap;line-height:1.8">
+        ${escapeHTML(article.body)}
+      </p>
+    `;
+
+    dialog.showModal();
+
+    document.getElementById('closeNewsDetail')
+      .addEventListener('click', () => dialog.close());
+  });
+});
   } catch (error) {
     console.error('Berita KKGK:', error);
     newsGrid.innerHTML =

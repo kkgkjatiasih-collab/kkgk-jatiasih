@@ -96,6 +96,7 @@ const showAllNews = document.getElementById('showAllNews');
           title: getField(metadata, 'title') || file.name,
           date: getField(metadata, 'date'),
           description: getField(metadata, 'description'),
+          thumbnail: getField(metadata, 'thumbnail'),
           body: cleanText(body)
         };
       })

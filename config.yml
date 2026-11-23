@@ -33,3 +33,15 @@ collections:
         fields:
           - { label: "Judul", name: "title", widget: "string" }
           - { label: "Isi", name: "body", widget: "markdown" }
+
+  - name: "galeri"
+    label: "Galeri Kegiatan"
+    folder: "content/galeri"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Nama Kegiatan", name: "title", widget: "string" }
+      - { label: "Tanggal Kegiatan", name: "date", widget: "datetime" }
+      - { label: "Foto Kegiatan", name: "thumbnail", widget: "image" }
+      - { label: "Keterangan", name: "description", widget: "text" }
+      - { label: "Cerita Kegiatan", name: "body", widget: "markdown" }

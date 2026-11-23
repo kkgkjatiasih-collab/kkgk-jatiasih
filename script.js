@@ -38,11 +38,13 @@ if (showAllNews) {
     'https://api.github.com/repos/kkgkjatiasih-collab/kkgk-jatiasih/contents/content/berita?ref=main';
 
   function getField(text, field) {
-    const match = text.match(
-      new RegExp('^' + field + ':\\s*["\\']?([^\\r\\n]*?)["\\']?\\s*$', 'm')
-    );
-    return match ? match[1].trim() : '';
-  }
+  const pattern = new RegExp(
+    "^" + field + ":\\s*[\"']?([^\\r\\n]*?)[\"']?\\s*$",
+    "m"
+  );
+  const match = text.match(pattern);
+  return match ? match[1].trim() : "";
+}
 
   function cleanText(text) {
     return text

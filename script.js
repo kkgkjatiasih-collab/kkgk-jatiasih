@@ -262,3 +262,54 @@ newsGrid.querySelectorAll('.news-card').forEach(card => {
       '<p class="demo-note">Berita belum dapat dimuat. Silakan coba beberapa saat lagi.</p>';
   }
 })();
+// Mengambil profil KKGK dari CMS
+(async function loadKKGKProfile() {
+  try {
+    const response = await fetch(
+      'https://raw.githubusercontent.com/kkgjatiasih-collab/kkgk-jatiasih/main/content/profil.md'
+    );
+
+    if (!response.ok) throw new Error('Profil tidak ditemukan');
+
+    const content = await response.text();
+    const parts = content.split(/^---\s*$/m);
+    const metadata = parts.length >= 3 ? parts[1] : '';
+    const body = parts.length >= 3 ? parts.slice(2).join('\n') : content;
+
+    function getProfileField(field) {
+      const match = metadata.match(
+        new RegExp('^' + field + ':\\s*["\\']?([^\\r\\n]*?)["\\']?\\s*$', 'm')
+      );
+      return match ? match[1].trim() : '';
+    }
+
+    function cleanProfileText(text) {
+      return text
+        .replace(/^#{1,6}\s+/gm, '')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/\*(.*?)\*/g, '$1')
+        .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    const kicker = document.getElementById('profileKicker');
+    const title = document.getElementById('profileTitle');
+    const description = document.getElementById('profileDescription');
+
+    if (kicker && getProfileField('label')) {
+      kicker.textContent = getProfileField('label');
+    }
+
+    if (title && getProfileField('title')) {
+      title.textContent = getProfileField('title');
+    }
+
+    if (description) {
+      description.textContent =
+        getProfileField('description') || cleanProfileText(body);
+    }
+  } catch (error) {
+    console.error('Profil KKGK:', error);
+  }
+})();
